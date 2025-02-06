@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{asset('styles/login.css')}}">
+{% endblock %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {# <h1>Register</h1>
+
+    {{ form_errors(registrationForm) }}
+
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+        {{ form_row(registrationForm.agreeTerms) }}
+
+        <button type="submit" class="btn">Register</button>
+    {{ form_end(registrationForm) }} #}
+
+    <div class="container">
+        <div class="screen">
+            <div class="screen__content">
+                {{ form_start(registrationForm, { 'attr': {'class': 'login'} }) }}
+                    <div class="login__field">
+                        <i class="login__icon fas fa-user"></i>
+                        {{ form_widget(registrationForm.email) }}
+                    </div>
+                    <div class="login__field">
+                        <i class="login__icon fas fa-lock"></i>
+                        {{ form_widget(registrationForm.plainPassword) }}
+                    </div>
+                    <div class="login__field">
+                        {{ form_widget(registrationForm.agreeTerms) }}
+                        <label for="agreeTerms">J'accepte les conditions d'utilisation</label>
+                        {{ form_widget(registrationForm.submit) }}
+                    </div>
+                    </button>
+                    <div class="textinverse">
+                        Déjà inscrit ?
+                        <a href="{{ path('app_login') }}"> Connecte-toi </a>
+                    </div>
+                {{ form_end(registrationForm) }}
+            </div>
+            <div class="screen__background">
+                <span class="screen__background__shape screen__background__shape4"></span>
+                <span class="screen__background__shape screen__background__shape3"></span>		
+                <span class="screen__background__shape screen__background__shape2"></span>
+                <span class="screen__background__shape screen__background__shape1"></span>
+            </div>		
+        </div>
+    </div>
+{% endblock %}
