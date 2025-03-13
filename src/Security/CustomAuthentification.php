@@ -22,9 +22,10 @@ class CustomAuthentification implements AuthenticationSuccessHandlerInterface
     {
         $user = $token->getUser();
         if (in_array('ROLE_ADMIN', $user->getRoles())) {
-            return new RedirectResponse($this->router->generate('admin'));
+            return new RedirectResponse($this->router->generate('admin_dashboard'));
         }
-
-        return new RedirectResponse($this->router->generate('user_dashboard'));
+        else {
+            return new RedirectResponse($this->router->generate('user_dashboard'));
+        }
     }
 }

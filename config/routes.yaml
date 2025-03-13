@@ -8,6 +8,10 @@ dashboard:
     path: /admin
     controller: App\Controller\Admin\DashboardController::index
 
-AdminUser:
-    path: /admin/user
-    controller: App\Controller\Admin\UserCrudController::index
+admin_dashboard:
+    path: /admin
+    controller: App\Controller\DashboardController::index
+
+user_dashboard:
+    path: /app_page_index
+    controller: App\Controller\PageController::index

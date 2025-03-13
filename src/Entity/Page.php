@@ -18,7 +18,7 @@ class Page
     private ?string $title = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $content = null;
+    private ?string $content = "<h1>SALUT TEST H1 PAR DEFAULT</h1>";
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $seo_url = null;

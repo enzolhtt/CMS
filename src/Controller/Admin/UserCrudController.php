@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -16,14 +17,14 @@ class UserCrudController extends AbstractCrudController
         return User::class;
     }
 
-    // public function configureFields(string $pageName): iterable
-    // {
-    //     return [
-    //         IdField::new('id')->hideOnForm(),
-    //         EmailField::new('email'),
-    //         ArrayField::new('roles'),
-    //     ];
-    // }
+    public function configureFields(string $pageName): iterable
+    {
+        return [
+            IdField::new('id'),
+            TextField::new('email'),
+            ArrayField::new('roles', 'Roles'),
+        ];
+    }
 }
 
 

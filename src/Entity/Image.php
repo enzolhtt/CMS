@@ -14,40 +14,43 @@ class Image
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $file_path = null;
+    #[ORM\Column(type: "blob", nullable: true)]
+    private $file_path;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $caption = null;
+    private ?string $description = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $uploaded_at = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $nom = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getFilePath(): ?string
+    public function getFilePath()
     {
         return $this->file_path;
     }
 
-    public function setFilePath(?string $file_path): static
+    public function setFilePath($file_path): self
     {
         $this->file_path = $file_path;
 
         return $this;
     }
 
-    public function getCaption(): ?string
+    public function getDescription(): ?string
     {
-        return $this->caption;
+        return $this->description;
     }
 
-    public function setCaption(?string $caption): static
+    public function setDescription(?string $description): static
     {
-        $this->caption = $caption;
+        $this->description = $description;
 
         return $this;
     }
@@ -60,6 +63,18 @@ class Image
     public function setUploadedAt(?\DateTimeInterface $uploaded_at): static
     {
         $this->uploaded_at = $uploaded_at;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(?string $nom): static
+    {
+        $this->nom = $nom;
 
         return $this;
     }

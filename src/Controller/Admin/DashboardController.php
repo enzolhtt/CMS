@@ -24,11 +24,6 @@ class DashboardController extends AbstractDashboardController
  
     public function index(): Response
     {
-        $user = $this->getUser(); // Récupérer l'utilisateur connecté
-
-        if ($user->getRoles() != "ROLE_USER"){
-            return $this->redirectToRoute("user");
-        }
         // Redirection automatique vers la liste des utilisateurs
         $url = $this->adminUrlGenerator
             ->setController(UserCrudController::class)

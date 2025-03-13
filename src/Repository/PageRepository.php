@@ -16,6 +16,15 @@ class PageRepository extends ServiceEntityRepository
         parent::__construct($registry, Page::class);
     }
 
+
+    public function findPageBySeoUrl($seourl){
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.seo_url = :seourl')
+            ->setParameter('seourl', $seourl)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
     //    /**
     //     * @return Page[] Returns an array of Page objects
     //     */
