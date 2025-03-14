@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Page;
+use App\Entity\Article;
 use App\Form\PageType;
 use App\Repository\PageRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -44,11 +45,13 @@ final class PageController extends AbstractController
     }
 
     #[Route('/{seourl}', name: 'app_page_show', methods: ['GET'])]
-    public function show(string $seourl, Page $page, PageRepository $pageRepository): Response
+    public function show(string $seourl, Page $page, PageRepository $pageRepository, Article $articles): Response
     {
         $page = $pageRepository->findPageBySeoUrl($seourl);
+        $articles = $page->getArticles();
         return $this->render('page/show.html.twig', [
             'page' => $page,
+            'articles' => $articles,
         ]);
     }
 

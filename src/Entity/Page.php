@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PageRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -18,7 +20,7 @@ class Page
     private ?string $title = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $content = "<h1>SALUT TEST H1 PAR DEFAULT</h1>";
+    private ?string $content = "";
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $seo_url = null;
@@ -31,6 +33,17 @@ class Page
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updated_at = null;
+
+    /**
+     * @var Collection<int, Article>
+     */
+    #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'page')]
+    private Collection $articles;
+
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -105,6 +118,36 @@ class Page
     public function setUpdatedAt(?\DateTimeInterface $updated_at): static
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Article>
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Article $article): static
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles->add($article);
+            $article->setPage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): static
+    {
+        if ($this->articles->removeElement($article)) {
+            // set the owning side to null (unless already changed)
+            if ($article->getPage() === $this) {
+                $article->setPage(null);
+            }
+        }
 
         return $this;
     }

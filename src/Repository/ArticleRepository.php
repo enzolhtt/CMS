@@ -16,6 +16,15 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
+    public function findArticleBySeoUrl($seourl){
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.seo_url = :seourl')
+            ->setParameter('seourl', $seourl)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
     //    /**
     //     * @return Article[] Returns an array of Article objects
     //     */

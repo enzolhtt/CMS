@@ -26,7 +26,7 @@ class DashboardController extends AbstractDashboardController
     {
         // Redirection automatique vers la liste des utilisateurs
         $url = $this->adminUrlGenerator
-            ->setController(UserCrudController::class)
+            ->setController(PageCrudController::class)
             ->generateUrl();
  
         return $this->redirect($url);
@@ -41,11 +41,25 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Utilisateurs', 'fa fa-users', User::class);
-        yield MenuItem::linkToCrud('Pages', 'fa fa-folder-open', Page::class);
-        yield MenuItem::linkToCrud('Articles', 'fa fa-book', Article::class);
-        yield MenuItem::linkToCrud('Commentaires', 'fa fa-comment', Commentaire::class);
-        yield MenuItem::linkToCrud('Galeries', 'fa fa-briefcase', Galerie::class);
-        yield MenuItem::linkToCrud('Images', 'fa fa-photo', Image::class);
+        yield MenuItem::linkToUrl('Site', 'fa fa-globe', $this->generateUrl('app_page_index'));
+
+        if($this->isGranted('ROLE_ADMIN')){
+            yield MenuItem::section('Administration');
+            yield MenuItem::linkToCrud('Utilisateurs', 'fa fa-users', User::class);
+            yield MenuItem::linkToCrud('Pages', 'fa fa-folder-open', Page::class);
+            yield MenuItem::linkToCrud('Articles', 'fa fa-book', Article::class);
+            yield MenuItem::linkToCrud('Commentaires', 'fa fa-comment', Commentaire::class);
+            yield MenuItem::linkToCrud('Galeries', 'fa fa-briefcase', Galerie::class);
+            yield MenuItem::linkToCrud('Images', 'fa fa-photo', Image::class);
+        }
+        
+        if($this->isGranted('ROLE_REDACTEUR')){
+            yield MenuItem::section('Rédacteur');
+            yield MenuItem::linkToCrud('Pages', 'fa fa-folder-open', Page::class);
+            yield MenuItem::linkToCrud('Articles', 'fa fa-book', Article::class);
+            yield MenuItem::linkToCrud('Commentaires', 'fa fa-comment', Commentaire::class);
+            yield MenuItem::linkToCrud('Galeries', 'fa fa-briefcase', Galerie::class);
+            yield MenuItem::linkToCrud('Images', 'fa fa-photo', Image::class);
+        }
     }
 }

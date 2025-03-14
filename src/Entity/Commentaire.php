@@ -22,6 +22,9 @@ class Commentaire
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $status = null;
 
+    #[ORM\ManyToOne(inversedBy: 'commentaires')]
+    private ?Article $article = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,18 @@ class Commentaire
     public function setStatus(?string $status): static
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getArticle(): ?Article
+    {
+        return $this->article;
+    }
+
+    public function setArticle(?Article $article): static
+    {
+        $this->article = $article;
 
         return $this;
     }

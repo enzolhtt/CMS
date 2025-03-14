@@ -25,6 +25,16 @@ class PageRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
             ;
     }
+
+    public function findArticlesBySeoUrl($seourl)
+{
+    return $this->createQueryBuilder('p')
+        ->andWhere('p.seo_url = :seourl')
+        ->setParameter('seourl', $seourl)
+        ->getQuery()
+        ->getResult();
+}
+
     //    /**
     //     * @return Page[] Returns an array of Page objects
     //     */
