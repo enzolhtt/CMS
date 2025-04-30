@@ -3,5 +3,21 @@
 {% block title %}Article{% endblock %}
 
 {% block body %}
-    {{article.title}}
+    <div class="text-center" style= "display: flex; flex-direction: column;">
+        {{article.title}}
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhh1RJ-g1S313sOkgk1z94PfDercho_-Kr3Q&s" class="card-img-top" alt="..." style="width: 250px; align-self: center;">
+    </div>
+    
+    
+    {% for commentaire in commentaires %}
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-body">
+                <h5 class="card-title">{{commentaire.title}}</h5>
+                <p class="card-text">{{commentaire.content}}</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
 {% endblock %}

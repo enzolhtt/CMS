@@ -40,6 +40,9 @@ class Page
     #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'page')]
     private Collection $articles;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $statut = "En attente";
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -148,6 +151,18 @@ class Page
                 $article->setPage(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatut(): ?string
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(?string $statut): static
+    {
+        $this->statut = $statut;
 
         return $this;
     }

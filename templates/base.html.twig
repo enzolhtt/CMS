@@ -24,22 +24,20 @@
             {% block navbar %}
             <div class="navbar">
                 <div class="all">
-                    <div class="lefter">
-                        <div class="text"><a href="{{path('admin_dashboard')}}">Admin Dashboard</a></div>
-                    </div>
                     <div class="left">
-                        <div class="text">Se déconnecter</div>
+                        <div class="text"><a href="{{path('app_logout')}}">Se déconnecter</a></div>
                     </div>
                     <div class="center">
                         <div class="explainer"><span>Navigation</span></div>
-                        <div class="text">Pages</div>
                     </div>
                     <div class="right">
-                        <div class="text">Se connecter / S'inscrire</div>
+                        <div class="text"><a href="{{path('app_login')}}">Se connecter / S'inscrire</a></div>
                     </div>
-                    <div class="righter">
-                        <div class="text"><a href="{{path('admin_dashboard')}}">Rédacteur Dashboard</a></div>
-                    </div>
+                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_REDACTEUR') %}
+                        <div class="righter">
+                            <div class="text"><a href="{{path('admin_dashboard')}}">Dashboard</a></div>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
             {% endblock %}

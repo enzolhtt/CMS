@@ -12,15 +12,12 @@
 
 {{ page.content | raw}}
 
-<div class="AjoutArticle">
-  <h1>Listes des articles</h1>
-  <button><a href="{{path("app_article_new")}}">Ajouter un article</a></button>
-</div>
 
 <div class="row">
   {% for article in articles %}
     <div class="col-sm-3">
       <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhh1RJ-g1S313sOkgk1z94PfDercho_-Kr3Q&s" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">{{article.title}}</h5>
           <p class="card-text">{{article.content}}</p>

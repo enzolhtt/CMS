@@ -49,6 +49,7 @@ final class ArticleController extends AbstractController
         $commentaires = $article->getCommentaires();
         return $this->render('article/show.html.twig', [
             'article' => $article,
+            'commentaires' => $commentaires,
         ]);
     }
 

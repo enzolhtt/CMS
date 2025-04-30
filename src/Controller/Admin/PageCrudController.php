@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 
 class PageCrudController extends AbstractCrudController
 {
@@ -31,7 +32,19 @@ class PageCrudController extends AbstractCrudController
                 ],
             ]),
             TextField::new('seo_url'),
-            TextField::new('meta_description')
+            TextField::new('meta_description'),
+            TextField::new('statut', 'Statut')
+                ->formatValue(function ($value, $entity) {
+                    if ($value === 'Publie') {
+                        return '<span class="badge badge-success">Publié</span>';
+                    } elseif ($value === 'En attente') {
+                        return '<span class="badge badge-danger">Non publié</span>';
+                    } else {
+                        return '<span class="badge badge-secondary">Non Affecté</span>';
+                    }
+                })
+                ->renderAsHtml(),
+
         ];
     }
 }
